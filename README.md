@@ -4,13 +4,24 @@ jQuery Snake
 ##Objective
 Use jQuery to create an interactive snake game. This is supposed to be a challenge so there will be minimal code provided.
 
-##Step 1: Set up environment
+## Set up environment
+### Basic file structure
+#### 
 There's a basic file structure set up for you, use this as a starting point.
 
   * Like with everything you create, add a reset and normalize css file.
   * Link up your css and javascript files into your index.
   * Setup your animations file to load up when everything else is done loading. Hint: make your javascript file 'ready' for jquery ;)
   * Test your animations file by adding a console.log, and test your css by changing a background color or something.
+
+####
+/folder
+  /things
+  /stuff
+  
+#### 
+  EVEN MORE HELPING!
+
 
 ##Step 2: Create Game Window
 We need to set up a game window in which to move the snake around, and display a food block.
@@ -24,8 +35,11 @@ Instead of typing out 400 divs with different ids into our html, let's let javas
 ```
 <div class="cell-square" id="cell_??row??_??col??"></div>
 ```
-Now your page should have 400 divs created, but probably invisible. We need to add some styling
+Now your page should have 400 divs created, but probably invisible. We need to add some styling:
 * Style your 'pixels' divs so that they all fit into the game window you created. I would use percentages to set their width and height. You'll have to mess around with the css to get them to be stacked tight.
+
+In order to have
+
 
 ## Contributions
 If you see a problem or a typo, please fork, make the necessary changes, and create a pull request so we can review your changes and merge them into the master repo and branch.
