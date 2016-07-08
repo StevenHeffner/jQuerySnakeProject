@@ -17,13 +17,15 @@ We need to set up a game window in which to move the snake around, and display a
 We're going to use a 20x20 pixel window, each pixel will be a separate div. Each div needs a different id in order to be specifically referenced by our jquery selectors when moving the snake and generating food blocks.
 
 * Create a div in your HTML where we will add the pixels into. You can put this wherever you want on the page but you should have a set height and width that are equal to each other.
-* Instead of typing out 400 divs with different ids into our html, let's let javascript do that for us. We're going to use jQuery .append to fill up our window with pixels.
 
-Create 20 rows of 20 pixels (divs). Be sure to give each div an id that you can reference the rows and columns with later. This is an example of what the div would look like:
-```
-<div class="cell-square" id="cell_!!row!!_!!col!!"></div>
-```
+Instead of typing out 400 divs with different ids into our html, let's let javascript do that for us. We're going to use jQuery .append to fill up our window with pixels.
 
+ * Create 20 rows of 20 div (with javascript). Be sure to give each div a class and a unique id that you can reference the rows and columns with later. This is an example of what a div would look like, obviously yours will have numbers for row and col:
+```
+<div class="cell-square" id="cell_??row??_??col??"></div>
+```
+Now your page should have 400 divs created, but probably invisible. We need to add some styling
+* Style your 'pixels' divs so that they all fit into the game window you created. I would use percentages to set their width and height. You'll have to mess around with the css to get them to be stacked tight.
 
 ## Contributions
 If you see a problem or a typo, please fork, make the necessary changes, and create a pull request so we can review your changes and merge them into the master repo and branch.
