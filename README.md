@@ -12,18 +12,18 @@ There's a basic file structure set up for you, use this as a starting point.
   * Setup your animations file to load up when everything else is done loading. Hint: make your javascript file 'ready' for jquery ;)
   * Test your animations file by adding a console.log, and test your css by changing a background color or something.
 
-##Step 2: Initiate A Game Window
+##Step 2: Create Game Window
 We need to set up a game window in which to move the snake around, and display a food block.
-We're going to use a 20x20 pixel game window, each pixel will be a separate div, then each div needs a different id in order to be specifically referenced by our jquery selectors when moving the snake and generating food blocks.
+We're going to use a 20x20 pixel window, each pixel will be a separate div. Each div needs a different id in order to be specifically referenced by our jquery selectors when moving the snake and generating food blocks.
 
-* Instead of typing out 400 divs with different ids into our html, lets let javascript do that for us. Create 1 div in your html with a class of game-window
+* Create a div in your HTML where we will add the pixels into. You can put this wherever you want on the page but you should have a set height and width that are equal to each other.
+* Instead of typing out 400 divs with different ids into our html, let's let javascript do that for us. We're going to use jQuery .append to fill up our window with pixels.
+
+Create 20 rows of 20 pixels (divs). Be sure to give each div an id that you can reference the rows and columns with later. This is an example of what the div would look like:
 ```
-for (var r=0;r<20;r++){
-      for (var c=0;c<20;c++){
-      	gameWindow.append('<div class=cellSquare id=cell_'+r+'_'+c+'></div>');
-      }
-    }
+<div class="cell-square" id="cell_!!row!!_!!col!!"></div>
 ```
+
 
 ## Contributions
 If you see a problem or a typo, please fork, make the necessary changes, and create a pull request so we can review your changes and merge them into the master repo and branch.
