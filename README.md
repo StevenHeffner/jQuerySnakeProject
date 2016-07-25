@@ -2,7 +2,9 @@ jQuery Snake
 =============
 
 ##Objective
-Use jQuery to create an interactive snake game. This is supposed to be a challenge so there will be minimal code provided.
+###
+####
+Use jQuery to create an interactive snake game. This is supposed to be a challenge so try each step to the best of your ability before looking at the code examples.
 
 ## Set up environment
 ### Basic file structure
@@ -217,22 +219,113 @@ Now we can change the value of `dir` based on which key was pressed.
 * Inside the keyup event listener callback function set `dir` equal to 1 if the user pressed the down arrow, 2 if the user pressed the left arrow, 3 if the user pressed the up arrow, and 4 if the user pressed the right arrow. Now we have #2 taken care of.
 
 All that's left is to manipulate `snakeRow` and `snakeCol` based off the direction that's been set. Manipulating `snakeRow` dictates whether the snake is going up or down; adding to `snakeRow` sends the snake down, while subtracting makes it go up. Manipulating `snakeCol` dictates whether the snake is going left or right; adding to `snakeCol` sends the snake right, while subtracting makes it go left.
-* Inside the `update` function, look for the place where we were hard coding `snakeCol` to increment. Replace that line with some conditionals. Based off the current value of `dir`, increment or decrement the corresponding coordinate to send the snake in the right direction.
+* Inside the `update` function, look for the place where we hard coded `snakeCol` to increment. Replace that line with some conditionals. Based off the current value of `dir`, increment or decrement the corresponding coordinate to send the snake in the right direction.
 * Test out your snake game and make sure you can control your snake in the correct direction.
 
   - https://api.jquery.com/keyup/
   - http://keycode.info/
 
 ####
-more hints for previous section
+Run through a series of if statements inside the event handler callback. Something like: if the key that was pressed has the key code of (insert key code to check for), change `dir` to the direction value that corresponds to the key which was pressed.
+
+Then in your update function in the place where we initially were adding 1 to `snakeCol`, `snakeCol++`, replace it with conditionals that check the value of dir and based on the value (or the direction) add or subtract from the appropriate variable `snakeCol` or `snakeRow`. The easiest and cleanest way to do this is with a switch statement.
 
 ####
-code for previous examples
+Keyup event handler:
+```
+$(document).on('keyup', function(e) {
+  if(e.keyCode === 40 && dir !== 3) {
+    dir = 1;
+  }
+  if(e.keyCode === 37 && dir !== 4) {
+    dir = 2;
+  }
+  if(e.keyCode === 38 && dir !== 1) {
+    dir = 3;
+  }
+  if(e.keyCode === 39 && dir !== 2) {
+    dir = 4;
+  }
+});
+```
 
+Inside update function:
+```
+switch(dir){
+  case 1: sRow += 1;  // down
+  break;
+  case 2: sCol -= 1; // left
+  break;
+  case 3: sRow -= 1; // up
+  break;
+  case 4: sCol += 1; // right
+  break;
+}
+```
 
+### Feed the snake
+####
+Awesome we should be able to control the snake around the window with our arrow keys, which is cool, but that's about it. It's not challenging or really that fun at all. We need to feed the snake. We want to be able to eat the food block, have our snake grow, and then generate another food block.
 
-### Feed and Protect the snake
+We need to set up a check to see if the `newHead` of the snake is landing on a food block and when it is we need to:
 
+* Remove the food block css from the food block
+* Add the tail we removed back onto the end of `snake`
+* Generate another food block
+
+####
+Set up an if statement in your update function after creating the `newHead` variable that checks to see if `newHead` is equal to `food`, both of which are coordinates and will match if the snake eats the food block.
+
+* Push the coordinates saved on the `tail` variable back onto the `snake` array.
+* Remove the food cell class from the food block pixel
+* Generate another food block
+
+####
+```
+if(newHead === food) {
+  snake.push(tail);
+  $('#cell'+food).removeClass("food-cell")
+  randomFood();
+}
+```
+
+### Discipline the snake
+####
+Your snake doesn't have to go hungry anymore! Good job! But your snake also doesn't have to abide by the rules of the game, and that's not cool. No one likes a rule breaker, so lets set up some rules and consequences for breaking the rules.
+
+The rules are simple: Don't run into the wall, and don't run into yourself. Sounds like we need another if statement.
+
+* At the bottom of the update function before the setTimeout, write an if statement that checks to see if the row or column that `newHead` is being set to is outside the boundaries of our game window OR if the pixel that we're adding `newHead` to is already a snake cell.
+  * If it is out of bounds or if it hit itself, throw up some kind of alert telling the player they lost, and stop the game.
+* Make sure to set it up so that if none of these conditions are met, the new snake head is still added.
+
+  - http://stackoverflow.com/questions/2363840/how-to-use-or-condition-in-a-javascript-if-statement
+####
+In the if statement check to see if `snakeCol` and `snakeRow` are greater than 19, or less than 0. If they are the snake has gone out of bounds and the player loses.
+
+In the same if statement check to see if the cell that's going to be the new snake head has a class of snake-cell. If it does the snake ran into itself and the player loses.
+
+####
+```
+if (snakeCol < 0 || snakeRow < 0 || snakeCol > 19 || snakeRow > 19 || $('#cell' + newHead).hasClass('snake-cell')) {
+    console.log('You lost !');
+    return;
+} else {
+    $('#cell' + newHead).addClass('snake-cell');
+}
+```
+
+## Black Diamonds
+### Game quirks and user experience
+####
+We should have a functional jquery snake game. But there are some things that don't quite feel right:
+
+* Create a score counter that keeps track of the players score and displays it in the html
+* The way that we coded the game there's a weird unexpected animation when the snake hits the wall. It looks like it doesn't stop at the wall, it looks like it goes into the wall. This is because the tail was removed before the check. Fix this animation.
+* The game starts when the page loads up, and doesn't restart until the page is refreshed. Create a way for the user to START the game, and to restart the game when they lose. (keypress?)
+* There's nothing stopping you from pressing the left arrow when your snake is going right, which will make you lose. Create a check to make sure if you're going right, you can't press left, and same with the other directions.
 
 ## Contributions
+###
+####
 If you see a problem or a typo, please fork, make the necessary changes, and create a pull request so we can review your changes and merge them into the master repo and branch.
