@@ -45,7 +45,7 @@ Now your page should have 400 divs created, but they're probably invisible. We n
 ####
 We should be able to create the html elements we want with javascript and jquery. A double for loop would do the job for us here. The outer for loop will represent and set the row numbers on our 'pixels', and the inner for loop will set the column number. We want both loops to run 20 times.
 
-  http://api.jquery.com/append/
+  - http://api.jquery.com/append/
 
 ####
 Create a for loop with a counter `r` set equal to 0, have the loop run while `r` is less than 20, and increment `r` once every time. Then create a for loop inside of the one we just created with a counter `c` set equal to 0, have the loop run while `c` is less than 20, and increment `c` once every time.
@@ -77,7 +77,7 @@ To add the snake onto our screen we are just going to change the css of some of 
 * In your css file, create a 'snake-cell' class. You can make your snake look however you like, but it at least needs a background color that's different from the color of the original pixel color.
 * Inside of your initiateGameWindow function after your double for loops, target the first 3 cells of the first column in your game window with jquery and add your snake cell class.
 
-http://api.jquery.com/addClass/
+  - http://api.jquery.com/addClass/
 
 ####
 We're targeting the cells by their id, which we set to have a unique row and column so we can get the ones we want.
@@ -99,7 +99,7 @@ The game of snake involves a snake that moves around the screen eating blocks of
  * Set the value of food equal to the row and column coordinates following this format: `"_row#_col#"`
 * Invoke your randomFood function at the end of the initiateGameWindow function.
 
-http://www.w3schools.com/jsref/jsref_random.asp
+  - http://www.w3schools.com/jsref/jsref_random.asp
 
 ####
 To generate a number between 0 and 19 inclusive:
@@ -161,9 +161,9 @@ Finally we need to set it up so that this update function repeats itself on an i
 Last but not least:
 * Invoke the update function, and watch your snake move across the screen.
 
-http://www.w3schools.com/jsref/jsref_pop.asp
-http://www.w3schools.com/jsref/jsref_split.asp
-http://www.w3schools.com/jsref/met_win_settimeout.asp
+  - http://www.w3schools.com/jsref/jsref_pop.asp
+  - http://www.w3schools.com/jsref/jsref_split.asp
+  - http://www.w3schools.com/jsref/met_win_settimeout.asp
 
 ####
 The easiest way to have the last value removed from the end of the `snake` array and stored onto a variable is to use the Array.pop() method.
@@ -220,14 +220,14 @@ All that's left is to manipulate `snakeRow` and `snakeCol` based off the directi
 * Inside the `update` function, look for the place where we were hard coding `snakeCol` to increment. Replace that line with some conditionals. Based off the current value of `dir`, increment or decrement the corresponding coordinate to send the snake in the right direction.
 * Test out your snake game and make sure you can control your snake in the correct direction.
 
-https://api.jquery.com/keyup/
-http://keycode.info/
+  - https://api.jquery.com/keyup/
+  - http://keycode.info/
 
 ####
 more hints for previous section
 
 ####
-code for previous section
+code for previous examples
 
 
 
