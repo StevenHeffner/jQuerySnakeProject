@@ -2,7 +2,7 @@ jQuery Snake
 =============
 
 ##Objective
-###
+### jQuery Snake Project Objective
 ####
 Use jQuery to create an interactive snake game. This is supposed to be a challenge so try each step to the best of your ability before looking at the code examples.
 
@@ -39,15 +39,15 @@ Instead of typing out 400 divs with different ids into our html, let's let javas
 
  * Inside your initiateGameWindow function, create 20 rows of 20 div (with javascript/jquery). Be sure to give each div a class and a unique id that you can reference the rows and columns with later. This is an example of what a div would look like, obviously yours will have numbers for row and col:
 ```
-<div class="cell-square" id="cell_(row#)_(column#)"></div>
+<div class='cell-square' id='cell_(row#)_(column#)'></div>
 ```
 Now your page should have 400 divs created, but they're probably invisible. We need to add some styling:
 * Style your `pixels` so that they all fit into the game window you created. I would use percentages to set their width and height. You'll have to mess around with the css to get them to be stacked tight.
 
+  - http://api.jquery.com/append/
+
 ####
 We should be able to create the html elements we want with javascript and jquery. A double for loop would do the job for us here. The outer for loop will represent and set the row numbers on our 'pixels', and the inner for loop will set the column number. We want both loops to run 20 times.
-
-  - http://api.jquery.com/append/
 
 ####
 Create a for loop with a counter `r` set equal to 0, have the loop run while `r` is less than 20, and increment `r` once every time. Then create a for loop inside of the one we just created with a counter `c` set equal to 0, have the loop run while `c` is less than 20, and increment `c` once every time.
@@ -84,9 +84,9 @@ To add the snake onto our screen we are just going to change the css of some of 
 ####
 We're targeting the cells by their id, which we set to have a unique row and column so we can get the ones we want.
 ```
-$("#cell_0_0").addClass("snake-cell");
-$("#cell_0_1").addClass("snake-cell");
-$("#cell_0_2").addClass("snake-cell");
+$('#cell_0_0').addClass('snake-cell');
+$('#cell_0_1').addClass('snake-cell');
+$('#cell_0_2').addClass('snake-cell');
 ```
 
 ### Generate random food block
@@ -98,7 +98,7 @@ The game of snake involves a snake that moves around the screen eating blocks of
 * Outside of our initiateGameWindow function, write a function called randomFood.
  * The function will create 2 random numbers between 0 and 19 inclusive representing a row and column.
  * With jquery, select the pixel that cooresponds to the random row and column you generated and add the food cell class you created onto it.
- * Set the value of food equal to the row and column coordinates following this format: `"_row#_col#"`
+ * Set the value of food equal to the row and column coordinates following this format: `'_row#_col#'`
 * Invoke your randomFood function at the end of the initiateGameWindow function.
 
   - http://www.w3schools.com/jsref/jsref_random.asp
@@ -114,11 +114,12 @@ Do this twice and store the result onto variables `foodRow` and `foodColumn`. Th
 ```
 var foodRow = Math.floor(Math.random() * 19);
 var foodCol = Math.floor(Math.random() * 19);
-var foodCell = $(`#cell_`+foodRow+`_`+foodCol);
-foodCell.addClass("food-cell");
-food = `_` + fRow + `_` + fCol;
+var foodCell = $('#cell_'+foodRow+'_'+foodCol);
+foodCell.addClass('food-cell');
+food = '_' + fRow + '_' + fCol;
 ```
 ### Initiate Game Window
+####
 We've got all the pieces we need to initiate the game window. We created a div in our html that we populated with 400 pixel divs, styles those divs to fit in the window, added the snake, create a random food block generator, and have our initiateGameWindow function set to invoke the food block generator at the end. There's only one thing left to do for this step:
 
 * Invoke initiateGameWindow
@@ -133,11 +134,11 @@ Right now nothing happens in our game. Lets first get the snake to move from lef
 
 We know we need an array to store something, but what do we store in the array in order to make animating the snake across the screen possible? What information do we store? We need to store the coordinates of the snake in this array, starting from the head at array[0] all the way up until the last tail cell at array[array.length - 1]. At the beginning there's only 3 snake cells so lets start there.
 
-* In the same area as your food variable, declare another global variable named `snake` which is an array. The array should contain the coordinates of the first 3 snake cells following the same format as the food block: `"_row#_col#"`
+* In the same area as your food variable, declare another global variable named `snake` which is an array. The array should contain the coordinates of the first 3 snake cells following the same format as the food block: `'_row#_col#'`
 
 ####
 ```
-var snake = ["_0_2", "_0_1", "_0_0"];
+var snake = ['_0_2', '_0_1', '_0_0'];
 ```
 
 ### Animate the snake
@@ -153,7 +154,7 @@ We need 2 things: the tail so we can remove the snake styles from it, and the he
 
 Now we can use these values to create a new snake head and add it to the beginning of the array. Increasing or decreasing the value of snakeRow will direct the snake up or down, while increasing or decreasing the value of snakeCol will move the snake left or right. For we want to get the snake to move from the left side to the right so we'll be adjusting snakeCol. Later on we'll add controls.
 * Add a line of code that will increase `sCol` by 1 everytime update is called.
-* Create a variable `newHead` that follows the format we've been using for coordinates `"_row#_col#"`. If you input the row and column values you parsed from the head along with the new incremented value of `snakeCol`, this `newHead` will be one square to the right of the original head everytime `update` is called.
+* Create a variable `newHead` that follows the format we've been using for coordinates `'_row#_col#'`. If you input the row and column values you parsed from the head along with the new incremented value of `snakeCol`, this `newHead` will be one square to the right of the original head everytime `update` is called.
 * Add `newHead` to the beginning of the snake array.
 * Use jquery to select the cell corresponding to the coordinates of `newHead` and add the snake-cell class we created earlier.
 
@@ -187,13 +188,13 @@ Your `update` function should look something like this:
 ```
 function update() {
     var tail = snake.pop();
-    $('#cell'+tail).removeClass("snake-cell");
+    $('#cell'+tail).removeClass('snake-cell');
     var head = snake[0];
-    var rowCol = head.split("_");
+    var rowCol = head.split('_');
     var sRow = Number(rowCol[1]);
     var sCol = Number(rowCol[2]);
     sCol++;
-    var newHead = "_"+sRow+"_"+sCol;
+    var newHead = '_'+sRow+'_'+sCol;
     snake.unshift(newHead);
     $('#cell'+newHead).addClass('snake-cell');
     setTimeout(update, 200);
@@ -284,7 +285,7 @@ Set up an if statement in your update function after creating the `newHead` vari
 ```
 if(newHead === food) {
   snake.push(tail);
-  $('#cell'+food).removeClass("food-cell")
+  $('#cell'+food).removeClass('food-cell')
   randomFood();
 }
 ```
