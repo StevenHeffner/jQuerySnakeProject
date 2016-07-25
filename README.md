@@ -252,13 +252,13 @@ $(document).on('keyup', function(e) {
 Inside update function:
 ```
 switch(dir){
-  case 1: sRow += 1;  // down
+  case 1: sRow++;  // down
   break;
-  case 2: sCol -= 1; // left
+  case 2: sCol--; // left
   break;
-  case 3: sRow -= 1; // up
+  case 3: sRow--; // up
   break;
-  case 4: sCol += 1; // right
+  case 4: sCol++; // right
   break;
 }
 ```
