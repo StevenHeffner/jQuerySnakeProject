@@ -41,8 +41,6 @@ Instead of typing out 400 divs with different ids into our html, let's let javas
 ```
 <div class='cell-square' id='cell_(row#)_(column#)'></div>
 ```
-Now your page should have 400 divs created, but they're probably invisible. We need to add some styling:
-* Style your `pixels` so that they all fit into the game window you created. I would use percentages to set their width and height. You'll have to mess around with the css to get them to be stacked tight.
 
   - http://api.jquery.com/append/
 
@@ -60,7 +58,14 @@ Create a for loop with a counter `r` set equal to 0, have the loop run while `r`
    }
    ```
 
-This will give us the affect of adding rows and columns onto the divs we're appending. With css something along the lines of:
+### Style your pixels
+####
+Now your page should have 400 divs created, but they're probably invisible and stacked in a column. We need to add some styling:
+
+* Style your `pixels` so that they all fit into the game window you created. I would use percentages to set their width and height. You'll have to mess around with the css to get them to be stacked tight.
+####
+
+This will give us the affect of adding rows and columns onto the divs we're appending. Your css should look something along the lines of:
 
 ```
 .cell-square {
